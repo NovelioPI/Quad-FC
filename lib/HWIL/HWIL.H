@@ -2,39 +2,47 @@
 #define HWIL_H
 
 #include <Arduino.h>
+#include <nanopb/pb_encode.h>
+#include <nanopb/pb_decode.h>
 
-class HWIL
+#define HEAD '&'
+
+class HWILCommunication
 {
 private:
-    float gyro_x;
-    float gyro_y;
-    float gyro_z;
-    float acc_x;
-    float acc_y;
-    float acc_z;
-    float alt_sonar;
+    float gyroX;
+    float gyroY;
+    float gyroZ;
+    float accX;
+    float accY;
+    float accZ;
+    float relativeAlt;
     float lat;
     float lon;
-    float alt;
+
 
 public:
-    HWIL(/* args */){}
-    ~HWIL(){}
+    uint8_t pwm[4];
 
-    void decode(String data);
+    HWILCommunication(/* args */){}
+    ~HWILCommunication(){}
 
-    float get_gyro_x() { return gyro_x; }
-    float get_gyro_y() { return gyro_y; }
-    float get_gyro_z() { return gyro_z; }
-    float get_acc_x() { return acc_x; }
-    float get_acc_y() { return acc_y; }
-    float get_acc_z() { return acc_z; }
-    float get_alt_sonar() { return alt_sonar; }
-    float get_lat() { return lat; }
-    float get_lon() { return lon; }
-    float get_alt() { return alt; }
+    void HWILThread();
+
+    void sendMessage();
+    void receiveMessage();
+
+    float getGyroX() { return gyroX; }
+    float getGyroY() { return gyroY; }
+    float getGyroZ() { return gyroZ; }
+    float getAccX() { return accX; }
+    float getAccY() { return accY; }
+    float getAccZ() { return accZ; }
+    float getRelativeAlt() { return relativeAlt; }
+    float getLat() { return lat; }
+    float getLon() { return lon; }
 };
 
-extern HWIL hwil;
+extern HWILCommunication hwil;
 
 #endif

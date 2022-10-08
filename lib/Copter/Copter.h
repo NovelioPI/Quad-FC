@@ -1,6 +1,9 @@
 #ifndef COPTER_H
 #define COPTER_H
 
+#include <IMU/IMU.h>
+#include <Controller.h>
+
 class Copter
 {
 private:
@@ -10,7 +13,7 @@ public:
     ~Copter(){}
 
     void setup();
-    void loop_task();
+    void loopTask();
     
 };
 
